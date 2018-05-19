@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<input type="text" placeholder="输入数据" onchange="test(this.value)">
+<input type="text" id="server_str" readonly="readonly" placeholder="显示数据">
+<script type="text/javascript">
+    function test(val){
+        console.log('1<hr>');
+        if ("WebSocket" in window){
+            console.log('01<hr>');
+            var os = new WebSocket("ws://127.0.0.1:11511");
+            console.log(os);
+            os.onopen = function(){
+                console.log('2<hr>');
+                if(os.readyState == 1){
+                    os.send(val);
+                    alert(val);
+                }
+            };
+
+            os.onmessage = function(evt){
+                console.log(evt.data);
+            };
+
+            os.onerror = function(evt){
+                console.log(evt);
+            };
+
+            os.onclose = function(){
+                os = false;
+            }
+        } else{
+           alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+</script>
+
+</body>
+</html>
