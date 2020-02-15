@@ -1,4 +1,5 @@
 <?php
+	//修改2020-02-15
     error_reporting(E_ALL);
     set_time_limit(0);
 
